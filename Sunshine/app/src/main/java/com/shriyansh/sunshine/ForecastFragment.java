@@ -122,6 +122,9 @@ public class ForecastFragment extends Fragment {
         int id=item.getItemId();
 
         if(id==R.id.action_refresh){
+
+            FetchWeatherTask weatherTask =new FetchWeatherTask();
+            weatherTask.execute();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -192,6 +195,10 @@ public class ForecastFragment extends Fragment {
                    return null;
                }
                forecastJsonStr = buffer.toString();
+
+               //Logging the response
+               Log.d(LOG_TAG,forecastJsonStr);
+
            } catch (IOException e) {
                Log.e(LOG_TAG, "Error ", e);
                // If the code didn't successfully get the weather data, there's no point in attemping
